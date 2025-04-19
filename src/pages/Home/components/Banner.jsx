@@ -29,7 +29,7 @@ const Banner = () => {
         <Carousel controls={false}>
             {bannerItems.map((item) => (
                 <Carousel.Item
-                    interval={2000}
+                    interval={1000}
                     className={styles.item}
                     style={{
                         height: '600px',
