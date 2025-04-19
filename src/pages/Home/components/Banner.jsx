@@ -36,7 +36,7 @@ const Banner = () => {
                         width: '100%',
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
-                        backgroundImage: 'url(' + `https://image.tmdb.org/t/p/original/${item.backdrop_path}` + ')',
+                        backgroundImage: 'url(' + `https://image.tmdb.org/t/p/original${item.backdrop_path}` + ')',
                     }}
                 >
                     <Carousel.Caption className={styles.caption}>

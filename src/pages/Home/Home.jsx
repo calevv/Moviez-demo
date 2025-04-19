@@ -1,12 +1,13 @@
 import React from 'react';
 import Banner from './components/Banner';
+import { Container } from '@mui/material';
 // import styles from './Home.module.css';
 
 const Home = () => {
     return (
         <div>
             <Banner />
-            Home
+            <Container>Home</Container>
         </div>
     );
 };
