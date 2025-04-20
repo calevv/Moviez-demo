@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './Banner.module.css';
 import Carousel from 'react-bootstrap/Carousel';
-import { usePopularMoviesQuery } from '../../../hooks/usePopularMovies';
+import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovies';
 import { Alert } from 'react-bootstrap';
 import _ from 'lodash';
 

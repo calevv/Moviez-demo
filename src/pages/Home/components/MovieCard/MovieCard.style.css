@@ -1,0 +1,65 @@
+@font-face {
+    font-family: 'Cafe24Ohsquare';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Cafe24Ohsquare.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.cardBox {
+    padding: 30px 15px;
+    position: relative;
+
+    cursor: pointer;
+}
+.movieCard {
+    border-radius: 10px;
+    max-width: 100%;
+    aspect-ratio: 2/3;
+    background-size: cover;
+    position: relative;
+}
+
+.movieCard::before {
+    content: attr(data-index);
+    position: absolute;
+
+    font-family: 'Cafe24Ohsquare';
+    left: 2px;
+    bottom: 0;
+    color: #ffffffdd;
+    font-weight: bold;
+    font-size: 5rem;
+    line-height: 1;
+    letter-spacing: -0.5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.cardBox .movieCard_modal {
+    display: none;
+}
+.cardBox:hover .movieCard::before {
+    display: none;
+}
+.cardBox:hover .movieCard_modal {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 15px;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateZ(50px);
+    z-index: 10;
+}
+.movieCard_modal ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 4px;
+}
+.movieCard_modal ul li {
+    background-color: #90caf9;
+
+    color: #fff;
+    border-radius: 5px;
+}

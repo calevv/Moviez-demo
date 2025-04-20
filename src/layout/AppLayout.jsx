@@ -106,9 +106,11 @@ const AppLayout = () => {
                             </figure>
                         </Link>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', marginLeft: '40px' } }}>
-                            {menuList.map((menu) => (
+                            {menuList.map((menu, index) => (
                                 <Link to={menu.url} style={{ textDecoration: 'none', color: 'white' }}>
-                                    <Button sx={{ my: 2, color: 'white', display: 'block' }}>{menu.title}</Button>
+                                    <Button key={index} sx={{ my: 2, color: 'white', display: 'block' }}>
+                                        {menu.title}
+                                    </Button>
                                 </Link>
                             ))}
                         </Box>
