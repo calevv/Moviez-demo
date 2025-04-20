@@ -8,8 +8,22 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
+import { useMovieGenreQuery } from '../../hooks/useMovieGenre';
 const MovieCard = ({ movie, index }) => {
     const navigate = useNavigate();
+
+    const { data: genreData } = useMovieGenreQuery();
+
+    console.log('data', genreData);
+
+    const showGenre = (genreIdList) => {
+        if (!genreIdList) return [];
+        const genreNameList = genreIdList.map((id) => {
+            const genreObject = genreData.find((genre) => genre.id === id);
+            return genreObject.name;
+        });
+        return genreNameList;
+    };
     return (
         <div className="cardBox">
             <div
@@ -32,7 +46,7 @@ const MovieCard = ({ movie, index }) => {
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'text.secondary' }} style={{ display: 'flex' }}>
                         <ul>
-                            {movie.genre_ids.map((item) => (
+                            {showGenre(movie.genre_ids).map((item) => (
                                 <li>{item}</li>
                             ))}{' '}
                         </ul>

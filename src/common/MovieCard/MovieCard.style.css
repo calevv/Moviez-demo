@@ -53,25 +53,26 @@
 }
 .movieCard_modal ul {
     padding: 0;
-    margin: 0;
+    margin: 5px 0;
     list-style: none;
     display: flex;
     gap: 4px;
 }
 .movieCard_modal ul li {
     background-color: #90caf9;
-
     color: #fff;
     border-radius: 5px;
+    padding: 2px;
 }
 .modalTitle {
     font-size: 1rem !important;
+    word-break: keep-all;
 }
 @media (max-width: 600px) {
     .movieCard::before {
         font-size: 2rem;
     }
     .modalTitle {
-        font-size: 0.5rem !important;
+        font-size: 0.8rem !important;
     }
 }
