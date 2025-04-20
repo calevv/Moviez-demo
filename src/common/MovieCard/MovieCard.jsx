@@ -12,14 +12,14 @@ import { useMovieGenreQuery } from '../../hooks/useMovieGenre';
 const MovieCard = ({ movie, index }) => {
     const navigate = useNavigate();
 
-    const { data: genreData } = useMovieGenreQuery();
+    const { data: genreData, isLoading } = useMovieGenreQuery();
 
     console.log('data', genreData);
 
     const showGenre = (genreIdList) => {
-        if (!genreIdList) return [];
+        if (!genreIdList || isLoading) return [];
         const genreNameList = genreIdList.map((id) => {
-            const genreObject = genreData.find((genre) => genre.id === id);
+            const genreObject = genreData.find((genre) => genre?.id === id);
             return genreObject.name;
         });
         return genreNameList;
@@ -30,7 +30,7 @@ const MovieCard = ({ movie, index }) => {
                 className="movieCard"
                 data-index={index + 1}
                 style={{
-                    backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`,
+                    backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie?.poster_path})`,
                 }}
             ></div>
             <Card className="movieCard_modal">
@@ -38,15 +38,15 @@ const MovieCard = ({ movie, index }) => {
                     component="img"
                     alt="green iguana"
                     height="30%"
-                    image={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                    image={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div" className="modalTitle">
-                        {movie.title}
+                        {movie?.title}
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'text.secondary' }} style={{ display: 'flex' }}>
                         <ul>
-                            {showGenre(movie.genre_ids).map((item) => (
+                            {showGenre(movie?.genre_ids).map((item) => (
                                 <li>{item}</li>
                             ))}{' '}
                         </ul>
@@ -56,7 +56,7 @@ const MovieCard = ({ movie, index }) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button onClick={() => navigate(`/movies/${movie.id}`)}>보러가기</Button>
+                    <Button onClick={() => navigate(`/movies/${movie?.id}`)}>보러가기</Button>
                 </CardActions>
             </Card>
         </div>
