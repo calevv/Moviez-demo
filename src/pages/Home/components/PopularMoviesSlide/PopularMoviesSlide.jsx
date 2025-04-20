@@ -2,49 +2,10 @@ import React from 'react';
 import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovies';
 import { Alert } from 'react-bootstrap';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
 import './PopularMoviesSlide.style.css';
-import Slider from 'react-slick';
-import MovieCard from '../MovieCard/MovieCard';
+import MovieSlider from './../../../../common/MovieSlider/MovieSlider';
 
 const PopularMoviesSlide = () => {
-    let settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 5,
-        initialSlide: 0,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 4,
-                    infinite: true,
-                    dots: true,
-                },
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    initialSlide: 2,
-                },
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                },
-            },
-        ],
-    };
-
     const { data, error, isError, isLoading } = usePopularMoviesQuery();
 
     if (isLoading) {
@@ -65,12 +26,7 @@ const PopularMoviesSlide = () => {
 
     return (
         <div>
-            <h2 className="slideTitle">지금 인기있는 영화 20 !</h2>
-            <Slider {...settings} className="slider-box">
-                {populars.map((movie, index) => (
-                    <MovieCard key={movie.id} movie={movie} index={index} />
-                ))}
-            </Slider>
+            <MovieSlider title={'유명영화 20선'} movies={populars} />
         </div>
     );
 };

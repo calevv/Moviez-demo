@@ -11,7 +11,7 @@ const Home = () => {
     return (
         <div>
             <Banner />
-            <Container style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <Container style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '40px' }}>
                 <PopularMoviesSlide />
                 <UpcommingMoviesSlide />
                 <NowMoviesSlide />
