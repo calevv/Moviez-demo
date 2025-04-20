@@ -20,8 +20,14 @@ const MovieCard = ({ movie, index }) => {
                 }}
             ></div>
             <Card className="movieCard_modal">
+                <CardMedia
+                    component="img"
+                    alt="green iguana"
+                    height="30%"
+                    image={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div" style={{ fontSize: '1rem' }}>
+                    <Typography gutterBottom variant="h5" component="div" className="modalTitle">
                         {movie.title}
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'text.secondary' }} style={{ display: 'flex' }}>
