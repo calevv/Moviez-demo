@@ -1,0 +1,13 @@
+.pagination {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.page-link {
+    background-color: black;
+}
+
+.page-item.disabled .page-link {
+    background-color: black;
+}
