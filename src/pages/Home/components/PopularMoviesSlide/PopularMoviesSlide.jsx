@@ -21,8 +21,7 @@ const PopularMoviesSlide = () => {
     }
 
     const populars = data?.results || [];
-
-    console.log('populars', populars);
+ 
 
     return (
         <div>

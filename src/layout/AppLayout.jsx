@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import { styled, alpha } from '@mui/material/styles';
+import React, {  useState } from 'react';
+import { Link, Outlet, useNavigate } from 'react-router-dom'; 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 
-import SearchIcon from '@mui/icons-material/Search';
-import { InputBase } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search'; 
 
 import styles from './AppLayout.module.css';
 
@@ -23,55 +21,23 @@ import HomeIcon from '@mui/icons-material/Home';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import AppsIcon from '@mui/icons-material/Apps';
 import ClearIcon from '@mui/icons-material/Clear';
+import { TextField } from '@mui/material'; 
 
 const menuList = [
     { title: 'Home', url: '/' },
     { title: 'Movies', url: '/movies' },
 ];
 
-const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
-        width: 'auto',
-    },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    width: '100%',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create('width'),
-        [theme.breakpoints.up('sm')]: {
-            width: '12ch',
-            '&:focus': {
-                width: '20ch',
-            },
-        },
-    },
-}));
+ 
 
 const AppLayout = () => {
+    const [search, setSearch]= useState('')
+const navigate = useNavigate(); 
+const searchByKeyword =(event)=>{
+    event.preventDefault();
+    navigate(`/movies?q=${search}`);
+    setSearch('');
+}
     const [open, setOpen] = useState(false);
 
     const toggleDrawer = (newOpen) => () => {
@@ -101,9 +67,9 @@ const AppLayout = () => {
                 <Container maxWidth="xl">
                     <Toolbar disableGutters className={styles.toolBar}>
                         <Link to="/">
-                            <figure>
+                            <Box>
                                 <img src="/moviez_logo.png" style={{ maxWidth: '70px' }} alt="logo" />
-                            </figure>
+                            </Box>
                         </Link>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', marginLeft: '40px' } }}>
                             {menuList.map((menu, index) => (
@@ -114,16 +80,13 @@ const AppLayout = () => {
                                 </Link>
                             ))}
                         </Box>
-
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <Search>
-                                <SearchIconWrapper></SearchIconWrapper>
-                                <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
-                            </Search>
-                            <Button variant="outlined" color="primary">
-                                <SearchIcon />
-                            </Button>
-                        </Box>
+ 
+                       <form style={{ display: 'flex', alignItems: 'center', gap: 1 }} onSubmit={searchByKeyword}>
+                            <TextField color="primary" id="standard-basic" label="Search" variant="standard" value={search} onChange={(event)=>{setSearch(event.target.value)}} />
+                                <Button  color="primary" type='submit'>
+                                    <SearchIcon />
+                                </Button>
+                       </form> 
                         <div className={styles.mobileMenu}>
                             <Button onClick={toggleDrawer(true)}>{open ? <ClearIcon /> : <AppsIcon />}</Button>
                             <Drawer open={open} onClose={toggleDrawer(false)}>

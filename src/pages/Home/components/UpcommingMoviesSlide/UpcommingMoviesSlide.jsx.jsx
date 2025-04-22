@@ -21,8 +21,7 @@ const UpcommingMoviesSlide = () => {
     }
 
     const upcomming = data?.results || [];
-
-    console.log('upcomming', upcomming);
+ 
 
     return (
         <div>

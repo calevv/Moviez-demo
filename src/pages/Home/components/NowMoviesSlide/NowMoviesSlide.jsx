@@ -20,8 +20,7 @@ const NowMoviesSlide = () => {
         );
     }
 
-    const nows = data?.results || [];
-    console.log('dd', nows);
+    const nows = data?.results || []; 
 
     return (
         <div>
