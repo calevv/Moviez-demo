@@ -1,79 +1,79 @@
 @font-face {
-  font-family: "Cafe24Ohsquare";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Cafe24Ohsquare.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Cafe24Ohsquare';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Cafe24Ohsquare.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 .cardBox {
-  padding: 30px 15px;
-  position: relative;
+    padding: 30px 15px;
+    position: relative;
 
-  cursor: pointer;
+    cursor: pointer;
 }
 .movieCard {
-  border-radius: 10px;
-  max-width: 100%;
-  aspect-ratio: 2/3;
-  background-size: cover;
-  position: relative;
+    border-radius: 10px;
+    max-width: 100%;
+    aspect-ratio: 2/3;
+    background-size: cover;
+    background-position: center;
+    position: relative;
 }
 
 .movieCard::before {
-  content: attr(data-index);
-  position: absolute;
+    content: attr(data-index);
+    position: absolute;
 
-  font-family: "Cafe24Ohsquare";
-  left: 2px;
-  bottom: 0;
-  color: #ffffffdd;
-  font-weight: bold;
-  font-size: 5rem;
-  line-height: 1;
-  letter-spacing: -0.5px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    font-family: 'Cafe24Ohsquare';
+    left: 2px;
+    bottom: 0;
+    color: #ffffffdd;
+    font-weight: bold;
+    font-size: 5rem;
+    line-height: 1;
+    letter-spacing: -0.5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .cardBox .movieCard_modal {
-  display: none;
+    display: none;
 }
 .cardBox:hover .movieCard::before {
-  display: none;
+    display: none;
 }
 .cardBox:hover .movieCard_modal {
-  width: calc(100% + 30px);
-  height: calc(100% + 30px);
-  box-sizing: border-box;
-  border-radius: 15px;
-  display: block;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) translateZ(50px);
-  z-index: 10;
+    width: calc(100% + 30px);
+    height: calc(100% + 30px);
+    box-sizing: border-box;
+    border-radius: 15px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) translateZ(50px);
+    z-index: 10;
 }
 .movieCard_modal ul {
-  padding: 0;
-  margin: 5px 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
+    padding: 0;
+    margin: 5px 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
 }
 .movieCard_modal ul li {
-  background-color: #90caf9;
-  color: #fff;
-  border-radius: 5px;
-  padding: 2px;
+    background-color: #90caf9;
+    color: #fff;
+    border-radius: 5px;
+    padding: 2px;
 }
 .modalTitle {
-  font-size: 1rem !important;
-  word-break: keep-all;
+    font-size: 1rem !important;
+    word-break: keep-all;
 }
 @media (max-width: 600px) {
-  .movieCard::before {
-    font-size: 2rem;
-  }
-  .modalTitle {
-    font-size: 0.8rem !important;
-  }
+    .movieCard::before {
+        font-size: 2rem;
+    }
+    .modalTitle {
+        font-size: 0.8rem !important;
+    }
 }
