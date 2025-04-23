@@ -1,16 +1,23 @@
-import { useQuery } from '@tanstack/react-query';
-import api from '../utils/api';
+import { useQuery } from "@tanstack/react-query";
+import api from "../utils/api";
 
-const fetchSearch = ({ keyword, page }) => {
-    return keyword
-        ? api.get(`/search/movie?query=${keyword}&page=${page}&language=ko-KR`)
-        : api.get(`/movie/popular?language=ko-KR&page=${page}`);
+const fetchSearch = ({ keyword, page, genreId, popularValue }) => {
+  return keyword
+    ? api.get(`/search/movie?query=${keyword}&page=${page}&language=ko-KR`)
+    : api.get(
+        `/discover/movie?language=ko-KR&page=${page}&with_genres=${genreId}&sort_by=${popularValue}`
+      );
 };
 
-export const useSearchMoviesQuery = ({ keyword, page }) => {
-    return useQuery({
-        queryKey: ['movie-search', keyword, page],
-        queryFn: () => fetchSearch({ keyword, page }),
-        select: (reault) => reault.data,
-    });
+export const useSearchMoviesQuery = ({
+  keyword,
+  page,
+  genreId,
+  popularValue,
+}) => {
+  return useQuery({
+    queryKey: ["movie-search", keyword, page, genreId, popularValue],
+    queryFn: () => fetchSearch({ keyword, page, genreId, popularValue }),
+    select: (reault) => reault.data,
+  });
 };
