@@ -7,7 +7,7 @@ import ReactPaginate from "react-paginate";
 import CircularProgress from "@mui/material/CircularProgress";
 import useFilterStore from "../../../../stores/useFilterStore";
 import { useSearchMoviesQuery } from "../../../../hooks/useSearchMovies";
-import _, { functions } from "lodash";
+import _ from "lodash";
 
 const SearchList = ({ keyword }) => {
   const navigate = useNavigate();
@@ -61,23 +61,19 @@ const SearchList = ({ keyword }) => {
       )
     : data?.results;
 
-  const sortedMovies = useMemo(() => {
-    console.log("useMemo 실행됨", filteredMovies, selectedPopular);
-    const sortedPopular = (movies, sortBy) => {
-      console.log("sortedPopular 함수 실행됨", movies, sortBy);
-      let sorted = movies;
-      if (sortBy === "popularity.desc") {
-        sorted = _.orderBy(movies, ["popularity"], ["desc"]);
-      } else if (sortBy === "popularity.asc") {
-        sorted = _.orderBy(movies, ["popularity"], ["asc"]);
-      }
-      console.log("sortedPopular 결과", sorted);
-      return sorted;
-    };
-    const result = sortedPopular(filteredMovies, selectedPopular);
-    console.log("useMemo 결과", result);
-    return result;
-  }, [filteredMovies, selectedPopular]);
+const sortedMovies = useMemo(() => { 
+  const sortedPopular = (movies, sortBy) => { 
+    let sorted = movies;
+    if (sortBy === "popularity.desc") {
+      sorted = _.orderBy(movies, ["popularity"], ["desc"]);
+    } else if (sortBy === "popularity.asc") {
+      sorted = _.orderBy(movies, ["popularity"], ["asc"]);
+    } 
+    return sorted;
+  };
+  const result = sortedPopular(filteredMovies, selectedPopular); 
+  return result;
+}, [filteredMovies, selectedPopular]);
 
   //console.log("asc", sortedMovies);
   return (
