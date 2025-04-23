@@ -1,8 +1,10 @@
 import React from 'react';
-
 import { Alert } from 'react-bootstrap';
+import { Container } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 import YouTube from 'react-youtube';
 import { useMovieVideoQuery } from '../../../hooks/useMovieVideo';
+
 const VideoYutube = ({ id }) => {
     const { data, error, isError, isLoading } = useMovieVideoQuery({ id });
 
@@ -28,12 +30,20 @@ const VideoYutube = ({ id }) => {
             </Alert>
         );
     }
+
+    if (!data || !data.results || data.results.length === 0) {
+        return (
+            <Alert key="warning" variant="warning">
+                이 영화의 예고편을 찾을 수 없습니다.
+            </Alert>
+        );
+    }
+
     return (
-        <div>
-            {' '}
+        <div className="video-container" style={{ width: '100%' }}>
             <YouTube
-                videoId={data?.results[0].key}
-                title={data?.results[0].name}
+                videoId={data.results[0].key}
+                title={data.results[0].name}
                 style={{ aspectRatio: '16/9' }}
                 opts={{
                     width: '100%',
@@ -47,7 +57,9 @@ const VideoYutube = ({ id }) => {
                         controls: 0,
                     },
                 }}
-                //이벤트 리스너
+                onError={(e) => {
+                    console.error('YouTube Player Error:', e.data);
+                }}
                 onEnd={(e) => {
                     e.target.stopVideo(0);
                 }}
