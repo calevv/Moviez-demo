@@ -1,0 +1,14 @@
+.container {
+    margin: 40px 0;
+}
+.videoBox {
+    display: flex;
+    flex-direction: column;
+}
+.videoBox > .videoText {
+    background-color: #1d2024;
+    height: 200px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 30px;
+}
