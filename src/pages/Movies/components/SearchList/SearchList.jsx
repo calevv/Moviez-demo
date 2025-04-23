@@ -77,7 +77,8 @@ const SearchList = ({ keyword }) => {
     };
     return sortedPopular(filteredMovies, selectedPopular);
   }, [filteredMovies, selectedPopular]);
-  console.log("asc", sortedMovies);
+
+  //console.log("asc", sortedMovies);
   return (
     <Container sx={{ padding: "20px" }}>
       {sortedMovies?.length > 0 ? (
