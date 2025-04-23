@@ -62,20 +62,21 @@ const SearchList = ({ keyword }) => {
     : data?.results;
 
   const sortedMovies = useMemo(() => {
-    const sortedPopular = (filteredMovies, selectedPopular) => {
-      let sortedMovies = filteredMovies;
-
-      if (selectedPopular === "popularity.desc") {
-        sortedMovies = _.orderBy(filteredMovies, ["popularity"], ["desc"]);
-      } else if (selectedPopular === "popularity.asc") {
-        sortedMovies = _.orderBy(filteredMovies, ["popularity"], ["asc"]);
-      } else {
-        sortedMovies = filteredMovies;
+    console.log("useMemo 실행됨", filteredMovies, selectedPopular);
+    const sortedPopular = (movies, sortBy) => {
+      console.log("sortedPopular 함수 실행됨", movies, sortBy);
+      let sorted = movies;
+      if (sortBy === "popularity.desc") {
+        sorted = _.orderBy(movies, ["popularity"], ["desc"]);
+      } else if (sortBy === "popularity.asc") {
+        sorted = _.orderBy(movies, ["popularity"], ["asc"]);
       }
-
-      return sortedMovies;
+      console.log("sortedPopular 결과", sorted);
+      return sorted;
     };
-    return sortedPopular(filteredMovies, selectedPopular);
+    const result = sortedPopular(filteredMovies, selectedPopular);
+    console.log("useMemo 결과", result);
+    return result;
   }, [filteredMovies, selectedPopular]);
 
   //console.log("asc", sortedMovies);
