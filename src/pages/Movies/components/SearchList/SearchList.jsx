@@ -60,20 +60,21 @@ const SearchList = ({ keyword }) => {
         item.genre_ids?.includes(selectedGenre.id)
       )
     : data?.results;
-  const sortedPopular = (filteredMovies, selectedPopular) => {
-    let sortedMovies = filteredMovies;
 
-    if (selectedPopular === "popularity.desc") {
-      sortedMovies = _.orderBy(filteredMovies, ["popularity"], ["desc"]);
-    } else if (selectedPopular === "popularity.asc") {
-      sortedMovies = _.orderBy(filteredMovies, ["popularity"], ["asc"]);
-    } else {
-      sortedMovies = filteredMovies;
-    }
-
-    return sortedMovies;
-  };
   const sortedMovies = useMemo(() => {
+    const sortedPopular = (filteredMovies, selectedPopular) => {
+      let sortedMovies = filteredMovies;
+
+      if (selectedPopular === "popularity.desc") {
+        sortedMovies = _.orderBy(filteredMovies, ["popularity"], ["desc"]);
+      } else if (selectedPopular === "popularity.asc") {
+        sortedMovies = _.orderBy(filteredMovies, ["popularity"], ["asc"]);
+      } else {
+        sortedMovies = filteredMovies;
+      }
+
+      return sortedMovies;
+    };
     return sortedPopular(filteredMovies, selectedPopular);
   }, [filteredMovies, selectedPopular]);
   console.log("asc", sortedMovies);
