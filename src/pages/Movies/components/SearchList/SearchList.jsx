@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import { Button, Container, Grid } from "@mui/material";
@@ -20,15 +20,50 @@ const SearchList = ({ keyword }) => {
     setSelectedPopular,
     selectedPopular,
   } = useFilterStore();
+
   useEffect(() => {
     setPage(1);
     setSelectedGenre(null);
     setSelectedPopular("");
-  }, [keyword]);
+  }, [keyword, setSelectedGenre, setSelectedPopular]);
+
   const { data, error, isError, isLoading } = useSearchMoviesQuery({
     keyword,
     page,
   });
+
+  // filteredMovies를 useMemo로 계산해서 불필요한 재계산 방지
+  const filteredMovies = useMemo(() => {
+    if (!data?.results) return [];
+
+    return selectedGenre
+      ? data.results.filter((item) =>
+          item.genre_ids?.includes(selectedGenre.id)
+        )
+      : data.results;
+  }, [data?.results, selectedGenre]);
+
+  // 정렬된 영화 목록 계산
+  useEffect(() => {
+    if (!filteredMovies.length) {
+      setSortedMovies([]);
+      return;
+    }
+
+    let newSortedMovies = [...filteredMovies];
+
+    if (selectedPopular === "popularity.desc") {
+      newSortedMovies.sort((a, b) => b.popularity - a.popularity);
+    } else if (selectedPopular === "popularity.asc") {
+      newSortedMovies.sort((a, b) => a.popularity - b.popularity);
+    }
+
+    setSortedMovies(newSortedMovies);
+  }, [filteredMovies, selectedPopular]);
+
+  const handlePageClick = ({ selected }) => {
+    setPage(selected + 1);
+  };
 
   if (isLoading) {
     return (
@@ -52,32 +87,13 @@ const SearchList = ({ keyword }) => {
       </Alert>
     );
   }
-  const handlePageClick = ({ selected }) => {
-    setPage(selected + 1);
-  };
 
-  const filteredMovies = selectedGenre
-    ? data?.results?.filter((item) =>
-        item.genre_ids?.includes(selectedGenre.id)
+  const pageCount = selectedGenre
+    ? Math.ceil(
+        (sortedMovies?.length || 0) /
+          (data?.results?.length > 0 ? data.results.length : 20)
       )
-    : data?.results;
-
-  console.log("filteredMovies", filteredMovies);
-  console.log("selectedPopular", selectedPopular);
-  useEffect(() => {
-    let newSortedMovies = [...filteredMovies]; // 불변성을 위해 복사
-
-    if (selectedPopular === "popularity.desc") {
-      newSortedMovies.sort((a, b) => b.popularity - a.popularity);
-    } else if (selectedPopular === "popularity.asc") {
-      newSortedMovies.sort((a, b) => a.popularity - b.popularity);
-    } else {
-      // 정렬 기준이 없을 경우 원래 필터링된 배열을 유지하거나 다른 기본 정렬 방식을 적용할 수 있습니다.
-      newSortedMovies = [...filteredMovies];
-    }
-
-    setSortedMovies(newSortedMovies);
-  }, [filteredMovies, selectedPopular]);
+    : data?.total_pages || 0;
   return (
     <Container sx={{ padding: "20px" }}>
       {sortedMovies?.length > 0 ? (
@@ -117,14 +133,7 @@ const SearchList = ({ keyword }) => {
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         marginPagesDisplayed={0}
-        pageCount={
-          selectedGenre
-            ? Math.ceil(
-                (sortedMovies?.length || 0) /
-                  (data?.results?.length > 0 ? data.results.length : 20)
-              )
-            : data?.total_pages
-        } // 전체페이지
+        pageCount={pageCount} // 전체페이지
         forcePage={page - 1} //선택페이지
         previousLabel="<"
         pageClassName="page-item"
