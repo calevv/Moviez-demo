@@ -7,7 +7,6 @@ import ReactPaginate from "react-paginate";
 import CircularProgress from "@mui/material/CircularProgress";
 import useFilterStore from "../../../../stores/useFilterStore";
 import { useSearchMoviesQuery } from "../../../../hooks/useSearchMovies";
-import _ from "lodash";
 
 const SearchList = ({ keyword }) => {
   const navigate = useNavigate();
@@ -61,26 +60,11 @@ const SearchList = ({ keyword }) => {
       )
     : data?.results;
 
-const sortedMovies = useMemo(() => { 
-  const sortedPopular = (movies, sortBy) => { 
-    let sorted = movies;
-    if (sortBy === "popularity.desc") {
-      sorted = _.orderBy(movies, ["popularity"], ["desc"]);
-    } else if (sortBy === "popularity.asc") {
-      sorted = _.orderBy(movies, ["popularity"], ["asc"]);
-    } 
-    return sorted;
-  };
-  const result = sortedPopular(filteredMovies, selectedPopular); 
-  return result;
-}, [filteredMovies, selectedPopular]);
-
-  //console.log("asc", sortedMovies);
   return (
     <Container sx={{ padding: "20px" }}>
-      {sortedMovies?.length > 0 ? (
+      {filteredMovies?.length > 0 ? (
         <Grid container spacing={2}>
-          {sortedMovies?.map((movie) => (
+          {filteredMovies?.map((movie) => (
             <Grid size={{ xs: 6, md: 3 }}>
               <MovieCard key={movie.id} movie={movie} />
             </Grid>
