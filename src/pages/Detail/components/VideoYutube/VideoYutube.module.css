@@ -1,0 +1,24 @@
+.imgBox {
+  display: flex;
+  aspect-ratio: 16/9;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.imgBox:before {
+  position: absolute;
+  content: "";
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.imgBox > img {
+  z-index: 1;
+  object-fit: contain;
+  aspect-ratio: 2/3;
+  height: 100%;
+}
