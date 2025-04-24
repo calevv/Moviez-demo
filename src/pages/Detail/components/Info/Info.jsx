@@ -56,7 +56,7 @@ const Info = () => {
         </AccordionSummary>
         <AccordionDetails>
           <Typography component="div">
-            {detailData?.genres === 0
+            {detailData?.genres !== 0
               ? showGenre(detailData?.genres).map((item, index) => (
                   <Button key={index}>{item}</Button>
                 ))
