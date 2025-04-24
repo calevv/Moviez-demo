@@ -36,7 +36,7 @@ const Recommend = () => {
         speed: 500,
         slidesToShow: 4,
         rows: 2,
-        slidesToScroll: 1,
+        slidesToScroll: 2,
         responsive: [
             {
                 breakpoint: 600,
@@ -47,7 +47,10 @@ const Recommend = () => {
             },
             {
                 breakpoint: 480,
-                settings: { rows: 1 },
+                settings: {
+                    slidesToShow: 2,
+                    rows: 1,
+                },
             },
         ],
     };
