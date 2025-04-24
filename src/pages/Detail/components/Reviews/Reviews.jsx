@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Reviews.module.css";
 import { useParams } from "react-router-dom";
-import { useMovieReviewsQuery } from "../../../../hooks/useMovieReviews,js";
-import List from "@mui/material/List";
+import { useMovieReviewsQuery } from "../../../../hooks/useMovieReviews.js";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { Button, CircularProgress, Container } from "@mui/material";
