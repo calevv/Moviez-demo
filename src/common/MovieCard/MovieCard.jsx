@@ -5,7 +5,6 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 import { useMovieGenreQuery } from '../../hooks/useMovieGenre';
@@ -25,7 +24,7 @@ const MovieCard = ({ movie, index }) => {
         return genreNameList;
     };
     return (
-        <div className="cardBox">
+        <div className="cardBox" onClick={() => navigate(`/movies/${movie?.id}`)}>
             {movie?.poster_path ? (
                 <div
                     className="movieCard"
@@ -74,9 +73,7 @@ const MovieCard = ({ movie, index }) => {
                         {movie.vote_average.toFixed(1)}
                     </Typography>
                 </CardContent>
-                <CardActions>
-                    <Button onClick={() => navigate(`/movies/${movie?.id}`)}>보러가기</Button>
-                </CardActions>
+                <CardActions></CardActions>
             </Card>
         </div>
     );
