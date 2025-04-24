@@ -26,7 +26,7 @@ const Info = () => {
 
   const castList = creditData?.cast || [];
   const crewList = creditData?.crew || [];
-
+  console.log(detailData?.genres);
   return (
     <div>
       <Accordion defaultExpanded>
@@ -56,7 +56,7 @@ const Info = () => {
         </AccordionSummary>
         <AccordionDetails>
           <Typography component="div">
-            {detailData?.genres !== 0
+            {detailData?.genres.length !== 0
               ? showGenre(detailData?.genres).map((item, index) => (
                   <Button key={index}>{item}</Button>
                 ))
