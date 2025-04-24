@@ -26,7 +26,7 @@ const Info = () => {
 
   const castList = creditData?.cast || [];
   const crewList = creditData?.crew || [];
-  console.log(detailData?.genres);
+  console.log(crewList);
   return (
     <div>
       <Accordion defaultExpanded>
