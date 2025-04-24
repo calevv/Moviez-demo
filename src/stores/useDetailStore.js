@@ -1,8 +1,8 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
-const useDetailStore = create((set, get) => ({
-  detailData: {},
-  setDetailData: (data) => set({ detailData: data }),
+const useDetailStore = create((set) => ({
+    detailData: {},
+    setDetailData: (data) => set({ detailData: data }),
 }));
 
 export default useDetailStore;

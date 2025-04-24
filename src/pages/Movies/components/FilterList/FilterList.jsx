@@ -22,27 +22,12 @@ const FilterList = ({ keyword }) => {
     let genreId = selectedGenre ? selectedGenre?.id : '';
     let popularValue = selectedPopular ? selectedPopular : '';
 
-    const { data, error, isError, isLoading } = useSearchMoviesQuery({
+    const { data, error, isError } = useSearchMoviesQuery({
         keyword,
         page,
         genreId,
         popularValue,
     });
-
-    if (isLoading) {
-        return (
-            <Container
-                sx={{
-                    display: 'flex',
-                    marginTop: '10%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}
-            >
-                <CircularProgress size="3rem" />
-            </Container>
-        );
-    }
 
     if (isError) {
         return (

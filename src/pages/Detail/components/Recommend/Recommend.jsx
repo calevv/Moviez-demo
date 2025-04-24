@@ -1,55 +1,77 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import { useMovieRecoQuery } from "../../../../hooks/useMovieReco";
-import { Container } from "@mui/material";
-import MovieCard from "../../../../common/MovieCard/MovieCard";
-import ReactPaginate from "react-paginate";
-import styles from "./Recommend.module.css";
-const Recommend = () => {
-  const { id } = useParams();
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useMovieRecoQuery } from '../../../../hooks/useMovieReco';
+import { Container } from '@mui/material';
+import MovieCard from '../../../../common/MovieCard/MovieCard';
+import { Alert } from 'react-bootstrap';
+import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovies';
+import useDetailStore from './../../../../stores/useDetailStore';
 
-  const [page, setPage] = useState(1);
-  const { data: recoData } = useMovieRecoQuery({ id, page });
-  console.log(recoData);
-  const handlePageClick = ({ selected }) => {
-    setPage(selected + 1);
-  };
-  return (
-    <div>
-      <Container>
-        <div className={styles.box}>
-          {recoData?.results.map((movie) => (
-            <div>
-              <MovieCard key={movie.id} movie={movie} />
-            </div>
-          ))}
+import Slider from 'react-slick';
+const Recommend = () => {
+    const { id } = useParams();
+    const { detailData } = useDetailStore();
+    const { data: recoData, isError, error } = useMovieRecoQuery({ id });
+
+    const { data: popData, isError: popIsError, error: popError } = usePopularMoviesQuery();
+
+    if (isError) {
+        return (
+            <Alert key="danger" variant="danger">
+                {error?.message || '영화 정보를 불러오는 중 오류가 발생했습니다.'}
+            </Alert>
+        );
+    }
+    if (popIsError) {
+        return (
+            <Alert key="danger" variant="danger">
+                {popError?.message || '영화 정보를 불러오는 중 오류가 발생했습니다.'}
+            </Alert>
+        );
+    }
+
+    const settings = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 4,
+        rows: 2,
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    rows: 2,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: { rows: 1 },
+            },
+        ],
+    };
+
+    return (
+        <div>
+            <Container>
+                <h4>{detailData?.title} 를 본 사람들의 추천 영화</h4>
+                <Slider {...settings} sx={{ width: '100%', bgcolor: 'background.paper' }}>
+                    {recoData?.total_results > 0
+                        ? recoData?.results.map((movie) => (
+                              <div className="recoCared">
+                                  <MovieCard key={movie.id} movie={movie} />
+                              </div>
+                          ))
+                        : popData?.results.map((movie) => (
+                              <div className="recoCared">
+                                  <MovieCard key={movie.id} movie={movie} />
+                              </div>
+                          ))}
+                </Slider>
+            </Container>
         </div>
-      </Container>
-      {recoData?.total_pages > 1 && (
-        <ReactPaginate
-          nextLabel=">"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
-          marginPagesDisplayed={0}
-          pageCount={recoData?.total_pages}
-          forcePage={page - 1}
-          previousLabel="<"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakLabel="..."
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          containerClassName="pagination"
-          activeClassName="active"
-          renderOnZeroPageCount={null}
-        />
-      )}
-    </div>
-  );
+    );
 };
 
 export default Recommend;

@@ -56,21 +56,6 @@ const SearchList = ({ keyword }) => {
         setPage(selected + 1);
     };
 
-    if (isLoading) {
-        return (
-            <Container
-                sx={{
-                    display: 'flex',
-                    marginTop: '10%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}
-            >
-                <CircularProgress size="3rem" />
-            </Container>
-        );
-    }
-
     if (isError) {
         return (
             <Alert key="danger" variant="danger">

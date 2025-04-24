@@ -1,14 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
-import api from "../utils/api";
+import { useQuery } from '@tanstack/react-query';
+import api from '../utils/api';
 
-const fetchMovieReco = ({ id, page }) => {
-  return api.get(`/movie/${id}/recommendations?language=ko-KR&page=${page}`);
+const fetchMovieReco = ({ id }) => {
+    return api.get(`/movie/${id}/recommendations?language=ko-KR`);
 };
 
-export const useMovieRecoQuery = ({ id, page }) => {
-  return useQuery({
-    queryKey: ["movie-reco", id, page],
-    queryFn: () => fetchMovieReco({ id, page }),
-    select: (reault) => reault.data,
-  });
+export const useMovieRecoQuery = ({ id }) => {
+    return useQuery({
+        queryKey: ['movie-reco', id],
+        queryFn: () => fetchMovieReco({ id }),
+        suspense: true,
+        select: (reault) => reault.data,
+    });
 };

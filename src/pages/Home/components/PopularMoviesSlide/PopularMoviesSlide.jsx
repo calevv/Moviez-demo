@@ -6,11 +6,7 @@ import './PopularMoviesSlide.style.css';
 import MovieSlider from './../../../../common/MovieSlider/MovieSlider';
 
 const PopularMoviesSlide = () => {
-    const { data, error, isError, isLoading } = usePopularMoviesQuery();
-
-    if (isLoading) {
-        return <h1>Loading...</h1>;
-    }
+    const { data, error, isError } = usePopularMoviesQuery();
 
     if (isError) {
         return (
@@ -21,7 +17,6 @@ const PopularMoviesSlide = () => {
     }
 
     const populars = data?.results || [];
- 
 
     return (
         <div>

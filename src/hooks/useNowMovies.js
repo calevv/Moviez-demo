@@ -9,6 +9,7 @@ export const useNowMoviesQuery = () => {
     return useQuery({
         queryKey: ['now-playing'],
         queryFn: fetchNowMovies,
+        suspense: true,
         select: (reault) => reault.data,
     });
 };

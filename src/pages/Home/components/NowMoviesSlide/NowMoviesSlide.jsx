@@ -6,11 +6,7 @@ import './NowMoviesSlide.style.css';
 import MovieSlider from '../../../../common/MovieSlider/MovieSlider';
 
 const NowMoviesSlide = () => {
-    const { data, error, isError, isLoading } = useNowMoviesQuery();
-
-    if (isLoading) {
-        return <h1>Loading...</h1>;
-    }
+    const { data, error, isError } = useNowMoviesQuery();
 
     if (isError) {
         return (
@@ -20,7 +16,7 @@ const NowMoviesSlide = () => {
         );
     }
 
-    const nows = data?.results || []; 
+    const nows = data?.results || [];
 
     return (
         <div>

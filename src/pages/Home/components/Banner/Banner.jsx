@@ -8,10 +8,8 @@ import _ from 'lodash';
 
 const Banner = () => {
     const [bannerItems, setBannerItems] = useState([]);
-    const { data, error, isError, isLoading } = usePopularMoviesQuery();
-    if (isLoading) {
-        <h1>Loading...</h1>;
-    }
+    const { data, error, isError } = usePopularMoviesQuery();
+
     if (isError) {
         <Alert key="danger" variant="danger">
             {error.message}

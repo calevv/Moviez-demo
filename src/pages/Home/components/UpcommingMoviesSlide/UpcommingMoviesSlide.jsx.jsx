@@ -6,11 +6,7 @@ import { useUpcommingMoviesQuery } from '../../../../hooks/useUpcommingMovies';
 import MovieSlider from '../../../../common/MovieSlider/MovieSlider';
 
 const UpcommingMoviesSlide = () => {
-    const { data, error, isError, isLoading } = useUpcommingMoviesQuery();
-
-    if (isLoading) {
-        return <h1>Loading...</h1>;
-    }
+    const { data, error, isError } = useUpcommingMoviesQuery();
 
     if (isError) {
         return (
@@ -21,7 +17,6 @@ const UpcommingMoviesSlide = () => {
     }
 
     const upcomming = data?.results || [];
- 
 
     return (
         <div>
