@@ -3,6 +3,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import Info from "../Info/Info";
+import Reviews from "../Reviews/Reviews";
+import Recommend from "../Recommend/Recommend";
 
 const TabMenu = () => {
   const [value, setValue] = useState("info");
@@ -27,8 +29,8 @@ const TabMenu = () => {
         </Tabs>
         <div className="detail-content" style={{ padding: "20px" }}>
           {value === "info" && <Info />}
-          {value === "reviews" && <div>reviews 컴포넌트 내용</div>}
-          {value === "recommend" && <div>추천 컴포넌트 내용</div>}
+          {value === "reviews" && <Reviews />}
+          {value === "recommend" && <Recommend />}
         </div>
       </Box>
     </div>

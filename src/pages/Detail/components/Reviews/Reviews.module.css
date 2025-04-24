@@ -1,0 +1,11 @@
+.reviewText {
+  display: flex;
+  flex-direction: column;
+  word-break: keep-all;
+  gap: 4px;
+}
+.reviewText button {
+  min-width: 100px;
+  margin-top: 5px;
+  align-self: center;
+}

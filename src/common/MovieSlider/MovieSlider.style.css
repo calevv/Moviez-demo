@@ -1,19 +1,19 @@
 .slider-box {
-    margin: 20px 20px;
+  margin: 20px 20px;
 }
 
-.slick-list {
-    overflow: visible !important;
+.slider-box .slick-list {
+  overflow: visible !important;
 }
 .slideTitle {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .slick-arrow {
-    z-index: 2;
-    transition: transform 0.3s ease-in-out;
+  z-index: 2;
+  transition: transform 0.3s ease-in-out;
 }
 
 .slick-arrow:hover {
-    transform: scale(1.5);
+  transform: scale(1.5);
 }

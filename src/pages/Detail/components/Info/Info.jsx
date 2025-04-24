@@ -26,7 +26,6 @@ const Info = () => {
 
   const castList = creditData?.cast || [];
   const crewList = creditData?.crew || [];
-  console.log("detailData", detailData);
 
   return (
     <div>

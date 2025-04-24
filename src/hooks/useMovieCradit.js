@@ -7,8 +7,7 @@ const fetchMovieCradit = ({ id }) => {
 
 export const useMovieCraditQuery = ({ id }) => {
   return useQuery({
-    queryKey: ["movie-cradit"],
-    id,
+    queryKey: ["movie-cradit", id],
     queryFn: () => fetchMovieCradit({ id }),
     select: (reault) => reault.data,
   });
