@@ -4,7 +4,7 @@ import { useMovieRecoQuery } from "../../../../hooks/useMovieReco";
 import { Container } from "@mui/material";
 import MovieCard from "../../../../common/MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
-
+import styles from "./Recommend.module.css";
 const Recommend = () => {
   const { id } = useParams();
 
@@ -17,13 +17,7 @@ const Recommend = () => {
   return (
     <div>
       <Container>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(10,1fr)",
-            gap: "10px",
-          }}
-        >
+        <div className={styles.box}>
           {recoData?.results.map((movie) => (
             <div>
               <MovieCard key={movie.id} movie={movie} />
