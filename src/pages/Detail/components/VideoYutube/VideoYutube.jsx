@@ -37,12 +37,14 @@ const VideoYutube = ({ id, posterUrl, title }) => {
   };
   if (hasError) {
     return (
-      <div
-        style={{ fontSize: "1.5rem", display: "flex", alignItems: "center" }}
-        className="movieCard"
-        data-index={typeof index !== "undefined" ? index + 1 : ""}
-      >
-        {title || "제목 없음"}
+      <div className={styles.imgBox}>
+        <div
+          style={{ fontSize: "1.5rem", display: "flex", alignItems: "center" }}
+          className="movieCard"
+          data-index={typeof index !== "undefined" ? index + 1 : ""}
+        >
+          {title || "제목 없음"}
+        </div>
       </div>
     );
   }
