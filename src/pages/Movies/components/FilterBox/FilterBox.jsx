@@ -11,12 +11,13 @@ import { useMovieGenreQuery } from "../../../../hooks/useMovieGenre";
 import useFilterStore from "../../../../stores/useFilterStore";
 import ReplayIcon from "@mui/icons-material/Replay";
 import styles from "./FilterBox.module.css";
+import { useNavigate } from "react-router-dom";
 
 const FilterBox = () => {
   const { data: genreData } = useMovieGenreQuery();
   const { setSelectedGenre, setSelectedPopular, selectedPopular } =
     useFilterStore();
-
+  const navigate = useNavigate();
   const handleGenreChange = (event) => {
     const selectedValue = event.target.value;
     const selectedGenreObject =
@@ -76,6 +77,7 @@ const FilterBox = () => {
         onClick={() => {
           setSelectedGenre("");
           setSelectedPopular("");
+          navigate("/movies");
         }}
       >
         <ReplayIcon />
