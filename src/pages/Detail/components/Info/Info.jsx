@@ -6,7 +6,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useMovieGenreQuery } from "../../../../hooks/useMovieGenre";
-import { Button, Stack } from "@mui/material";
+import { Button } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useMovieCraditQuery } from "../../../../hooks/useMovieCradit";
 

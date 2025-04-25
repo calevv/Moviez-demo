@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./MovieCard.style.css";
 
 import Card from "@mui/material/Card";
@@ -12,7 +12,7 @@ import GradeIcon from "@mui/icons-material/Grade";
 
 const MovieCard = ({ movie, index }) => {
   const navigate = useNavigate();
-
+  const [hasError, setHasError] = useState(false);
   const { data: genreData, isLoading } = useMovieGenreQuery();
 
   const showGenre = (genreIdList) => {
@@ -23,21 +23,19 @@ const MovieCard = ({ movie, index }) => {
     });
     return genreNameList;
   };
-
-  function handleImageError(event) {
-    event.target.onerror = null; // 무한 루프 방지
-    event.target.style.display = "none"; // 이미지 숨기기
-    const parentDiv = event.target.parentNode;
-    parentDiv.innerHTML = `
+  const handleImageError = () => {
+    setHasError(true);
+  };
+  if (hasError) {
+    return (
       <div
-          style={{ fontSize: "1.5rem", display: "flex", alignItems: "center" }}
-          className="movieCard"
-          data-index={typeof index !== "undefined" ? index + 1 : ""}
-        >
-          {" "}
-          {movie?.title}
-        </div>
-    `; // 대체 UI 표시
+        style={{ fontSize: "1.5rem", display: "flex", alignItems: "center" }}
+        className="movieCard"
+        data-index={typeof index !== "undefined" ? index + 1 : ""}
+      >
+        {movie?.title || "제목 없음"}
+      </div>
+    );
   }
   return (
     <div className="cardBox" onClick={() => navigate(`/movies/${movie?.id}`)}>
