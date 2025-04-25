@@ -13,6 +13,7 @@ import GradeIcon from "@mui/icons-material/Grade";
 const MovieCard = ({ movie, index }) => {
   const navigate = useNavigate();
   const [hasError, setHasError] = useState(false);
+  const [isLoadingImage, setIsLoadingImage] = useState(true);
   const { data: genreData, isLoading } = useMovieGenreQuery();
 
   const showGenre = (genreIdList) => {
@@ -25,7 +26,13 @@ const MovieCard = ({ movie, index }) => {
   };
   const handleImageError = () => {
     setHasError(true);
+    setIsLoadingImage(false); // 에러 발생 시 로딩 상태 종료
   };
+
+  const handleImageLoad = () => {
+    setIsLoadingImage(false); // 이미지 로딩 완료 시 상태 변경
+  };
+
   if (hasError) {
     return (
       <div
@@ -44,8 +51,16 @@ const MovieCard = ({ movie, index }) => {
           className="movieCard"
           data-index={typeof index !== "undefined" ? index + 1 : ""}
           onError={handleImageError}
+          onLoad={handleImageLoad}
           style={{
             backgroundImage: `url(https://image.tmdb.org/t/p/original${movie?.poster_path})`,
+            ...(isLoadingImage && {
+              // 로딩 중 스타일
+              backgroundColor: "#ccc",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+            }),
           }}
         ></div>
       ) : (
