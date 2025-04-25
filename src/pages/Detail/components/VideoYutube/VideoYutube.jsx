@@ -31,6 +31,22 @@ const VideoYutube = ({ id, posterUrl, title }) => {
     );
   }
 
+  function handleImageError(event) {
+    event.target.onerror = null; // 무한 루프 방지
+    event.target.style.display = "none"; // 이미지 숨기기
+    const parentDiv = event.target.parentNode;
+    parentDiv.innerHTML = `
+      <div
+          style={{ fontSize: "1.5rem", display: "flex", alignItems: "center" }}
+          className="movieCard"
+          data-index={typeof index !== "undefined" ? index + 1 : ""}
+        >
+          {" "}
+          {movie?.title}
+        </div>
+    `; // 대체 UI 표시
+  }
+
   if (!data || !data.results || data.results.length === 0) {
     return (
       <div
@@ -43,11 +59,27 @@ const VideoYutube = ({ id, posterUrl, title }) => {
           backgroundSize: "auto",
         }}
       >
-        <img
-          src={`https://image.tmdb.org/t/p/w500${posterUrl}`}
-          style={{ objectFit: "contain" }}
-          alt={title}
-        />
+        {posterUrl || posterUrl !== null ? (
+          <img
+            src={`https://image.tmdb.org/t/p/w500${posterUrl}`}
+            style={{ objectFit: "contain" }}
+            onError={handleImageError}
+            alt={title}
+          />
+        ) : (
+          <div
+            style={{
+              fontSize: "1.5rem",
+              display: "flex",
+              alignItems: "center",
+            }}
+            className="movieCard"
+            data-index={typeof index !== "undefined" ? index + 1 : ""}
+          >
+            {" "}
+            {title}
+          </div>
+        )}
       </div>
     );
   }

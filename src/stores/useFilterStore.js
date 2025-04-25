@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 const useFilterStore = create((set) => ({
-  selectedGenre: null,
+  selectedGenre: "",
   setSelectedGenre: (genre) => set({ selectedGenre: genre }),
   selectedPopular: "",
   setSelectedPopular: (Popular) => set({ selectedPopular: Popular }),

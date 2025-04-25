@@ -91,16 +91,14 @@ const AppLayout = () => {
             >
               {menuList.map((menu, index) => (
                 <Link
+                  key={index}
                   to={menu.url}
                   style={{ textDecoration: "none", color: "white" }}
                   onClick={
                     menu.url === "/movies" ? handleMoviesLinkClick : undefined
                   }
                 >
-                  <Button
-                    key={index}
-                    sx={{ my: 2, color: "white", display: "block" }}
-                  >
+                  <Button sx={{ my: 2, color: "white", display: "block" }}>
                     {menu.title}
                   </Button>
                 </Link>

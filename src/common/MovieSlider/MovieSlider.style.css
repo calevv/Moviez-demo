@@ -11,9 +11,4 @@
 
 .slick-arrow {
   z-index: 2;
-  transition: transform 0.3s ease-in-out;
-}
-
-.slick-arrow:hover {
-  transform: scale(1.5);
 }

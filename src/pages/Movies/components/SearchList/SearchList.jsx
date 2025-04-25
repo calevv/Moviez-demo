@@ -72,6 +72,7 @@ const SearchList = ({ keyword }) => {
       </Alert>
     );
   }
+  //console.log(sortedMovies);
 
   const pageCount = selectedGenre
     ? Math.ceil(
