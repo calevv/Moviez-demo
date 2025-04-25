@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import Info from "../Info/Info";
 import Reviews from "../Reviews/Reviews";
 import Recommend from "../Recommend/Recommend";
+import useDetailStore from "../../../../stores/useDetailStore";
 
 const TabMenu = () => {
   const [value, setValue] = useState("info");
-
+  const { detailData } = useDetailStore();
+  useEffect(() => {
+    setValue("info");
+  }, [detailData]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
